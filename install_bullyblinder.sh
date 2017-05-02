@@ -17,9 +17,6 @@ sudo mv geckodriver /usr/bin
 #pip stuff
 sudo pip install mechanize Beautifulsoup4 urlnorm selenium faker pyvirtualdisplay lmxl
 
-#grab common passwords
-wget https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/10k_most_common.txt -O 10k.txt
-
 #TROUBLESHOOTING
 
 #If you have pcap writing issues, use this to fixup dumpcap perms, observed when using digitalocean
