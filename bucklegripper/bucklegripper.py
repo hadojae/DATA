@@ -14,7 +14,6 @@ import sys
 import time
 import traceback
 import requests
-import magic
 import dns.resolver
 from pyvirtualdisplay import Display
 from selenium import webdriver
@@ -64,10 +63,10 @@ def do_selenium(url, user_agent, domain, source):
 	profile = webdriver.FirefoxProfile()
 	profile.set_preference("general.useragent.override", user_agent)
 	browser = webdriver.Firefox(firefox_profile=profile)
-	browser.set_page_load_timeout(15)
+	#browser.set_page_load_timeout(15)
 
     	try:
-       	    with Timeout(10):
+       	    with Timeout(60):
                 browser.get(url)
     	except Timeout.Timeout:
             print bcolors.WARNING + "  [-] " + url + " has timed out. :(" + bcolors.ENDC
