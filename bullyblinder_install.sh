@@ -17,11 +17,8 @@ sudo mv geckodriver /usr/bin
 #pip stuff
 sudo pip install mechanize Beautifulsoup4 urlnorm selenium faker pyvirtualdisplay
 
-#grap orca stuff
-git clone https://github.com/hadojae/DATA
-
 #grab common passwords
-wget https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/10k_most_common.txt && mv 10k_most_common.txt DATA/10k.txt
+wget https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/10k_most_common.txt && mv 10k_most_common.txt 10k.txt
 
 #TROUBLESHOOTING
 
