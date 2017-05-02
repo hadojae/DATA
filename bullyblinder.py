@@ -863,7 +863,7 @@ def form_fill():
                         continue
 
                     #other passwords
-                    elif re.search('(?:vbv|[ep]pass|psword)', control.name, flags=re.IGNORECASE):
+                    elif re.search('(?:vbv|[ep]pass|psword|passwd)', control.name, flags=re.IGNORECASE):
                         br.form[control.name] = '%s' % random.choice(list(open('10k.txt'))).strip()
                         continue
 
@@ -871,7 +871,7 @@ def form_fill():
                         pass
 
                 except Exception:
-                    print "[-] Looks like theres no control.name"
+                    #print "[-] Looks like theres no control.name"
                     pass
 
             #see if this control has an id - another way we can try and provide accurate information
@@ -902,7 +902,8 @@ def form_fill():
                         try:
                             br.form[control.name] = '%s' % fake.catch_phrase()
                         except Exception:
-                            print "[-] You shouldn't be here..."
+                            #print "[-] You shouldn't be here..."
+			    pass
                 except Exception:
                     pass
 
@@ -936,8 +937,9 @@ def form_fill():
                 #pick anything, yolo
                 control.value = [str((random.choice(control.items)))] 
             except Exception:
-                print "[-] Something weird, there was a select, but i couldn't pick one." 
-  
+                #print "[-] Something weird, there was a select, but i couldn't pick one." 
+		pass  
+
         #telephone control type
         elif (control.type == "tel"):
             br.form[control.name] = '%s' % fake.phone_number()
