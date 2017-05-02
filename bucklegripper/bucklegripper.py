@@ -1,8 +1,10 @@
 #!/usr/bin/python
 # bucklegripper.py
-# https://www.wired.com/2015/02/the-goonies-gadgets/
-# Automation for ORCA phishing kit acquisition
+# Automation for phishing kit acquisition
 # hadojae
+
+# need to do some hashing of the page content (md5/fuzzy/sha256)
+# need to setup output directories and log files
 
 # -*- coding: utf-8 -*-
 
@@ -79,7 +81,7 @@ def do_selenium(url, user_agent, domain, source):
 	# accept a pop up alert if one comes up
 	try:
 	    browser.switch_to_alert().accept()
-	    print bcolors.OKBLUE + "[+] Popup Alert observed, bypassing..." + bcolors.ENDC
+	    print "[+] Popup Alert observed, bypassing..."
 	except Exception:
 	    pass
 
@@ -87,7 +89,7 @@ def do_selenium(url, user_agent, domain, source):
 	try:
 	    pagesource = browser.page_source
 	    if re.search("<iframe src=\"http:\/\/mcc\.godaddy\.com\/park\/|https:\/\/www\.godaddy\.com\/domains\/search\.aspx|\/px\.js\?ch=1\"><\/script>|<td bgcolor=\"#788298\">|http:\/\/findbetterresults\.com\/\?dn=|Sponsored Listings displayed above are served automatically by a third party|La Caja Verde RSS Feed|http:\/\/imptestrm\.com\/rg\-erdr\.php\?_dnm=|http:\/\/c\.parkingcrew\.net\/|parking\.jino\.ru\/static\/main\.js|cdn\.dsultra\.com\/js\/registrar\.js|http:\/\/www\.findingresult\.com\/\?dn=|This page is parked free, courtesy of Media Temple|\/js\/standard\.js\?rte=1&tm=2&dn=|This error is generated when there was no web page with the name you specified at the web site|url: \'\/logpstatus\.php|the domain that was pointed to by this Ow\.ly link has been blocked because it was used|href=\"\/hosting_static_403\/style\.css|Ow\.ly link bandito \(404 error\)|Please contact your service provider for more details|The page that you have requested could not be found", pagesource):
-	        print bcolors.FAIL + "  [-] Pagesource triggered a known FP string not screenshotting" + bcolors.ENDC
+	        print bcolors.FAIL + "  [-] Pagesource triggered a known FP string, omitting screenshot." + bcolors.ENDC
 		return False
 	except Exception:
 	    return False
@@ -99,7 +101,7 @@ def do_selenium(url, user_agent, domain, source):
 	        shot_name = time.strftime("%Y%m%d-%H%M%S") + '-' + source + '-' + domain + '.png'
          	try:
 		    browser.save_screenshot(shot_name)
-		    print bcolors.OKBLUE + "  [+] Screencapped %s as %s" % (url, shot_name) + bcolors.ENDC
+		    print "  [+] Screencapped %s as %s" % (url, shot_name)
 		except Exception:
 		    print bcolors.FAIL + "  [-] Unable to screencap " + url + bcolors.ENDC
  		    pass
@@ -126,7 +128,7 @@ def do_selenium(url, user_agent, domain, source):
 		    #	subprocess.call(['rm', resized_shot])
 
             else:
-		print bcolors.FAIL + "  [-] Pagetitle triggered a known FP string, not screenshotting." + bcolors.ENDC
+		print bcolors.FAIL + "  [-] Pagetitle triggered a known FP string, omitting screenshot." + bcolors.ENDC
 		pass
 
 	except Exception:
@@ -158,7 +160,7 @@ def search_php_files(response, partial_url):
 
     php_matches = list(set(re.findall('[a-zA-Z0-9_-]+\.php', response)))
     for f in php_matches:
-	print bcolors.OKBLUE + "  [+] Found php file: %s" % partial_url + f + bcolors.ENDC
+	print "  [+] Found php file: %s" % partial_url + f
     return
 
 def attempt_zip_download(zipurl, zipname, headers, domain, source):
@@ -212,7 +214,7 @@ def mainloop(full, headers, user_agent, source):
     nohttp = re.sub(r'^https?:\/\/','', full)
     parsed_uri = urlparse(full)
 
-    print bcolors.HEADER + "\n[+] Processing %s" % full + bcolors.ENDC
+    print "\n[+] Processing %s" % full
 
     #make sure domain resulves
     domain = check_domain(parsed_uri)
@@ -260,7 +262,7 @@ def mainloop(full, headers, user_agent, source):
         # check page content for evidence of opendir            
         if re.search(r'(?:<title>Index of|Parent Directory)', response) is not None:
             # look for files
-            print bcolors.OKBLUE + "[+] Found Opendir at %s" % partial_url + bcolors.ENDC
+            print "[+] Found Opendir at %s" % partial_url
             if re.search(r'\.(txt|rar|zip)', response) is not None:
                 search_opendir_files(response, partial_url, headers, domain, source)
             # look for php (we can't download these, just log)
@@ -272,11 +274,11 @@ def mainloop(full, headers, user_agent, source):
 
 def main():
 
-    parser = argparse.ArgumentParser(description='Visit a suspected phishing page and pillage it for phishing archives and take a screencap')
-    parser.add_argument('-u','--url', help='Url to visit - eg http://www.badguys.com/phish/landing.html',required=False,default=False)
+    parser = argparse.ArgumentParser(description='Visit a suspected phishing page, screenshot it and pillage it for phishing archives')
+    parser.add_argument('-u','--url', help='Url to visit',required=False,default=False)
     parser.add_argument('-s','--source', help='Apply a source to where this url came from',required=False,default="bucklegripper")
     parser.add_argument('-r','--readfile', help='Read in a file of URLs one per line',required=False,default=False)
-    parser.add_argument('-a','--useragent', help='Custom User-Agent to use',required=False,default="Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.85 Safari/537.36")
+    parser.add_argument('-a','--useragent', help='Custom User-Agent',required=False,default="Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.85 Safari/537.36")
 
     args = parser.parse_args()
     user_agent = args.useragent
@@ -295,7 +297,7 @@ def main():
         mainloop(full, headers, user_agent, source)
         sys.exit()
     else:
-        print bcolors.HEADER + "\n[+] Beginning processing of " + readfile + bcolors.ENDC
+        print "\n[+] Beginning processing of " + readfile
         with open(readfile) as f:
             content = f.readlines()
             for line in content:
@@ -306,7 +308,7 @@ def main():
                     print bcolors.FAIL + "[-] " + line + " is a Malformed URI" + bcolors.ENDC
                     continue 
   		mainloop(full, headers, user_agent, source)
-        print bcolors.HEADER + "\n[+] Finished processing " + readfile + '\n' + bcolors.ENDC
+        print "\n[+] Finished processing " + readfile + '\n'
         sys.exit() 
 
 if __name__ == '__main__':
