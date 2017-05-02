@@ -18,7 +18,7 @@ sudo mv geckodriver /usr/bin
 sudo pip install mechanize Beautifulsoup4 urlnorm selenium faker pyvirtualdisplay
 
 #grab common passwords
-wget https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/10k_most_common.txt && mv 10k_most_common.txt 10k.txt
+wget https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/10k_most_common.txt -O 10k.txt
 
 #TROUBLESHOOTING
 
