@@ -1,5 +1,6 @@
 #!/usr/bin/python
 #https://github.com/hadojae/DATA/
+#https://www.youtube.com/watch?v=McM6q4EgJNY
 
 ################ IMPORTS ################
 import sys
