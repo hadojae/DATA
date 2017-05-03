@@ -1,4 +1,5 @@
-nks out of pdf files
+#!/bin/bash
+#pull links out of pdf files
 #hadojae
 #param is path to pdf files
 #REQUIRES pdf-parser.py from https://blog.didierstevens.com/programs/pdf-tools/
