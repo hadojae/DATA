@@ -1,9 +1,7 @@
 # DATA
 Credential Phish Analysis and Automation
 
-DATA currently consists of the following scripts:
-
-## Bucklegripper (py)
+## BUCKLEGRIPPER (py)
   - Given a suspected phishing url or file of line separated urls, visit, screenshot, and scrape for interesting files.
   - Requirements can be installed by running or reviewing install_bucklegripper_deps.sh
 ```
@@ -76,7 +74,7 @@ $ python bucklegripper.py -s openphish -r ../../test_urls.txt
 ...continues...
 ```
 
-## Bullyblinder (py)
+## BULLYBLINDER (py)
   - While capturing a pcap visit a suspected phishing page. Handle redirectors and obfuscation to find a web form. Scrape the form and make educated guesses at what should be entered into the fields. Submit the form and repeat.
   - Requirements can be installed by running or reviewing install_bullyblinder_deps.sh
   
@@ -130,7 +128,7 @@ http://justpropertydevelopers.com/scan/docg/doc/filewords/index.php
 --http://justpropertydevelopers.com/scan/docg/doc/filewords/index.php
 ```
 
-## Slickshoes (sh)
+## SLICKSHOES (sh)
   - A basic bash script that pulls urls out of pdfs in streams or in clear view.
   - The only argument to the script is the path to a folder containing the pdfs you want to process.
   
@@ -148,3 +146,7 @@ http://afriquecalabashsafaris.com/layouts/GD/index.php
 http://akukoomole.com/AdobeLogin/index.php
 ...continues...
 ```
+
+*PINCHERSOFPERIL and BULLYBUSTER are WIP
+
+DATA scripts are a constant work in progress. Feedback, issues, and additions are welcomed. 
