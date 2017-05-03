@@ -2,7 +2,13 @@
 #pull links out of pdf files
 #hadojae
 #param is path to pdf files
-#REQUIRES pdf-parser.py from https://blog.didierstevens.com/programs/pdf-tools/
+
+pdf_parser_loc=''
+
+if [ -z $pdf_parser_loc ]; then
+    echo "Please set the location of pdf-parser.py in the first line of the script. Pdf parser can be downloaded from https://blog.didierstevens.com/programs/pdf-tools/".
+    exit
+fi
 
 cd $1
 
@@ -13,7 +19,7 @@ file_type="$(file -b $i)"
 
 if [ "${file_type%%,*}" == "PDF document" ]; then
     egrep -i -a -r -o --no-filename "http[^)]+" $i >> pdf_links.tmp
-    python ~/pdf/pdf-parser.py --searchstream --regex "https?:\/" --filter $i | egrep -i -a -o "http[^)\"\']+" >> pdf_links.tmp
+    python $pdf_parser_loc --searchstream --regex "https?:\/" --filter $i | egrep -i -a -o "http[^)\"\']+" >> pdf_links.tmp
 fi
 
 done
@@ -24,3 +30,4 @@ sort -u pdf_links.tmp | egrep -i -v -a "(DidierStevens\.com|fonts\.com|typoland\
 
 #cleanup
 rm pdf_links.tmp
+

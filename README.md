@@ -132,6 +132,7 @@ http://justpropertydevelopers.com/scan/docg/doc/filewords/index.php
 ## SLICKSHOES (sh)
   - A basic bash script that pulls urls out of pdfs in streams or in clear view.
   - The only argument to the script is the path to a folder containing the pdfs you want to process.
+  - REQUIRES pdf-parser.py from https://blog.didierstevens.com/programs/pdf-tools/ location to be set in first line of script
   
 Example Usage
 ```
