@@ -149,4 +149,6 @@ http://akukoomole.com/AdobeLogin/index.php
 
 *PINCHERSOFPERIL and BULLYBUSTER are WIP
 
-DATA scripts are a constant work in progress. Feedback, issues, and additions are welcomed. 
+DATA scripts are a constant work in progress. Feedback, issues, and additions are welcomed.
+
+Proper python packages will be created once suffecient testing and features have been added and more bugs have been squashed.
