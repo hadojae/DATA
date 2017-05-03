@@ -22,9 +22,31 @@ optional arguments:
   -a USERAGENT, --useragent USERAGENT
                         Custom User-Agent
 ```
-Example Usage
+
+Example of reading in a single url
+```
+$ python bucklegripper.py -s openphish -u http://www.govwebsearch.com/apc/opc/pdp/safe/optusnet.com.au/Login.html 
+
+.: BUCKLEGRIPPER v0.1 https://github.com/hadojae/DATA/ :.
+
+[+] Processing http://www.govwebsearch.com/apc/opc/pdp/safe/optusnet.com.au/Login.html
+  [+] Screencapped http://www.govwebsearch.com/apc/opc/pdp/safe/optusnet.com.au/Login.html as 20170503-032950-openphish-www.govwebsearch.com.png
+  [+] Found Zip file at http://www.govwebsearch.com/apc/opc/pdp/safe/optusnet.com.au.zip
+  [+] Saved http://www.govwebsearch.com/apc/opc/pdp/safe/optusnet.com.au.zip as 20170503-032950-openphish-www.govwebsearch.com-optusnet.com.au.zip
+[+] Found Opendir at http://www.govwebsearch.com/apc/opc/pdp/safe/optusnet.com.au/
+  [+] Found php file: http://www.govwebsearch.com/apc/opc/pdp/safe/optusnet.com.au/post.php
+[+] Found Opendir at http://www.govwebsearch.com/apc/opc/pdp/safe/
+  [+] Saved http://www.govwebsearch.com/apc/opc/pdp/safe/optusnet.com.au.zip as 20170503-032951-openphish-www.govwebsearch.com-optusnet.com.au.zip
+[+] Found Opendir at http://www.govwebsearch.com/apc/opc/pdp/
+[+] Found Opendir at http://www.govwebsearch.com/apc/opc/
+[+] Found Opendir at http://www.govwebsearch.com/apc/
+```
+
+Example of reading in a file of line separated urls
 ```
 $ python bucklegripper.py -s openphish -r ../../test_urls.txt
+
+.: BUCKLEGRIPPER v0.1 https://github.com/hadojae/DATA/ :.
 
 [+] Beginning processing of ../../test_urls.txt
 
@@ -44,6 +66,14 @@ $ python bucklegripper.py -s openphish -r ../../test_urls.txt
   [+] Found Zip file at http://suesschool.com/yahoologin.zip
   [+] Saved http://suesschool.com/yahoologin.zip as 20170503-010125-openphish-suesschool.com-yahoologin.zip
 [+] Found Opendir at http://suesschool.com/yahoologin/
+
+[+] Processing http://communitypartnersjc.org/wp-admin/js/index
+  [+] Screencapped http://communitypartnersjc.org/wp-admin/js/index as 20170503-010138-openphish-communitypartnersjc.org.png
+
+[+] Processing http://ytrdesh.com/info/
+  [+] Screencapped http://ytrdesh.com/info/ as 20170503-010148-openphish-ytrdesh.com.png
+  
+...continues...
 ```
 
 ## Bullyblinder (py)
@@ -62,6 +92,43 @@ optional arguments:
   -i INTERFACE, --interface INTERFACE
                         Interface to tell tshark to listen on
 ```
+Example Usage
+```
+$ python bullyblinder.py -i eth0 -u http://www.justpropertydevelopers.com/scanned
+
+.: BULLYBLINDER v0.1 https://github.com/hadojae/DATA/ :.
+
+[+] Preparing pcap: 20170503-033243-www.justpropertydevelopers.com.pcap
+
+[+] Processing http://www.justpropertydevelopers.com/scanned
+
+[+] Submitting POST
+    [+] Control: <HiddenControl(hidCflag=1)>, Control.Type: hidden, Control.Name: hidCflag, Control.ID: hidCflag
+    [+] Control: <SelectControl(<None>=[])>, Control.Type: select, Control.Name: None, Control.ID: None
+    [+] Control: <SelectControl(<None>=[*0])>, Control.Type: select, Control.Name: None, Control.ID: None
+    [+] Control: <SelectControl(<None>=[*1])>, Control.Type: select, Control.Name: None, Control.ID: None
+    [+] Control: <SelectControl(<None>=[*2])>, Control.Type: select, Control.Name: None, Control.ID: None
+    [+] Control: <SelectControl(<None>=[*3])>, Control.Type: select, Control.Name: None, Control.ID: None
+    [+] Control: <SelectControl(<None>=[*4])>, Control.Type: select, Control.Name: None, Control.ID: None
+    [+] Control: <TextControl(Email=shannonjudith@gmail.com)>, Control.Type: email, Control.Name: Email, Control.ID: Email
+    [+] Control: <PasswordControl(Passwd=696969)>, Control.Type: password, Control.Name: Passwd, Control.ID: Passwd
+    [+] Control: <SubmitControl(signIn=Sign in to view attachment) (readonly)>, Control.Type: submit, Control.Name: signIn, Control.ID: signIn
+    [+] Control: <CheckboxControl(PersistentCookie=[yes])>, Control.Type: checkbox, Control.Name: PersistentCookie, Control.ID: PersistentCookie
+    [+] Control: <HiddenControl(rmShown=1) (readonly)>, Control.Type: hidden, Control.Name: rmShown, Control.ID: None
+
+ [-] No form found, checking for redirectors and obfuscation. 
+
+[+] Found js window.location or document.location, processing the redir
+
+[+] https://drive.google.com/#my-drive appears to be a legitimate website.
+
+[+] Complete! Submitted 1 form(s)
+
+[+] Url Request Chain:
+http://justpropertydevelopers.com/scan/docg/doc/filewords/index.php
+--http://justpropertydevelopers.com/scan/docg/doc/filewords/index.php
+```
+
 ## Slickshoes (sh)
   - A basic bash script that pulls links out of pdfs in streams or in clear view.
   
