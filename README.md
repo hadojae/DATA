@@ -1,6 +1,8 @@
 # DATA
 Credential Phish Analysis and Automation
 
+*Tested on Headless Ubuntu Server 16.04 
+
 ## BUCKLEGRIPPER (py)
   - Given a suspected phishing url or file of line separated urls, visit, screenshot, and scrape for interesting files.
   - Requirements can be installed by running or reviewing install_bucklegripper_deps.sh
@@ -149,4 +151,6 @@ http://akukoomole.com/AdobeLogin/index.php
 
 *PINCHERSOFPERIL and BULLYBUSTER are WIP
 
-DATA scripts are a constant work in progress. Feedback, issues, and additions are welcomed. 
+DATA scripts are a constant work in progress. Feedback, issues, and additions are welcomed.
+
+Proper python packages will be created once suffecient testing and features have been added and more bugs have been squashed.
