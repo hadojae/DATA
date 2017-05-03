@@ -967,7 +967,8 @@ def form_fill():
 
         #catchall for debugging
         else:
-            print "[-] I don't know how you got here %s %s %s %s" % (control, control.type, control.name, control.id)
+            #print "[-] I don't know how you got here %s %s %s %s" % (control, control.type, control.name, control.id)
+	    pass
 
 def fixup_url(current_url):
         if re.search(r'^http', br.form.action):
