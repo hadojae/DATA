@@ -1037,7 +1037,7 @@ def tshark(action):
 ################ START MAIN ################
 if __name__ == "__main__":
 
-    print "\n.: BULLYBLINDER v0.1 https://github.com/hadojae/bullyblinder :."
+    print "\n.: BULLYBLINDER v0.1 https://github.com/hadojae/DATA :."
 
     parser = argparse.ArgumentParser(description='Visit a suspected phishing page and attempt form filling while getting a pcap')
     parser.add_argument('-u','--url', help='Url to visit',required=True,default=False)

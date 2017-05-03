@@ -274,6 +274,8 @@ def mainloop(full, headers, user_agent, source):
 
 def main():
 
+    print "\n.: BUCKLEGRIPPER v0.1 https://github.com/hadojae/DATA :."
+
     parser = argparse.ArgumentParser(description='Visit a suspected phishing page, screenshot it and pillage it for phishing archives')
     parser.add_argument('-u','--url', help='Url to visit',required=False,default=False)
     parser.add_argument('-s','--source', help='Apply a source to where this url came from',required=False,default="bucklegripper")
