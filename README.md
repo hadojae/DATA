@@ -22,6 +22,30 @@ optional arguments:
   -a USERAGENT, --useragent USERAGENT
                         Custom User-Agent
 ```
+Example Usage
+```
+$ python bucklegripper.py -s openphish -r ../../test_urls.txt
+
+[+] Beginning processing of ../../test_urls.txt
+
+[+] Processing http://onjasela.net/DB/fr/
+  [+] Screencapped http://onjasela.net/DB/fr/ as 20170503-010034-openphish-onjasela.net.png
+
+[+] Processing http://suesschool.com/yahoologin/yahoologin/clients/login.php
+  [+] Screencapped http://suesschool.com/yahoologin/yahoologin/clients/login.php as 20170503-010053-openphish-suesschool.com.png
+[+] Found Opendir at http://suesschool.com/yahoologin/yahoologin/clients/
+  [+] Found php file: http://suesschool.com/yahoologin/yahoologin/clients/login.php
+  [+] Found php file: http://suesschool.com/yahoologin/yahoologin/clients/data.php
+  [+] Found php file: http://suesschool.com/yahoologin/yahoologin/clients/block.php
+[+] Found Opendir at http://suesschool.com/yahoologin/yahoologin/
+  [+] Found php file: http://suesschool.com/yahoologin/yahoologin/login.php
+  [+] Found php file: http://suesschool.com/yahoologin/yahoologin/data.php
+  [+] Found php file: http://suesschool.com/yahoologin/yahoologin/block.php
+  [+] Found Zip file at http://suesschool.com/yahoologin.zip
+  [+] Saved http://suesschool.com/yahoologin.zip as 20170503-010125-openphish-suesschool.com-yahoologin.zip
+[+] Found Opendir at http://suesschool.com/yahoologin/
+```
+
 ## Bullyblinder (py)
   - While capturing a pcap visit a suspected phishing page. Handle redirectors and obfuscation to find a web form. Scrape the form and make educated guesses at what should be entered into the fields. Submit the form and repeat.
   - Requirements can be installed by running or reviewing install_bullyblinder_deps.sh
