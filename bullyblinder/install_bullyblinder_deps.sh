@@ -16,16 +16,3 @@ sudo mv geckodriver /usr/bin
 
 #pip stuff
 sudo pip install mechanize Beautifulsoup4 urlnorm selenium faker pyvirtualdisplay lmxl
-
-#TROUBLESHOOTING
-
-#If you have pcap writing issues, use this to fixup dumpcap perms, observed when using digitalocean
-#change myusername to your username
-#-----
-#sudo chgrp myusername /usr/bin/dumpcap
-#sudo chmod 750 /usr/bin/dumpcap
-#sudo setcap cap_net_raw,cap_net_admin+eip /usr/bin/dumpcap
-#-----
-
-# remember to set your interface properly otherwise checksum errors may eat your face when you try to read pcaps w/ tools
-# AS ROOT: for i in rx tx sg tso ufo gso gro lro; do ethtool -K eth0 $i off; done
