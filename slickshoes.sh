@@ -6,9 +6,9 @@
 pdf_parser_loc=''
 
 if [ -z $pdf_parser_loc ]; then
-    echo "Please set the full path location of pdf-parser.py in the first line of the script."
-    echo "eg. '/home/user/downloads/pdf-parser.py' " 
-    echo "Pdf parser can be downloaded from https://blog.didierstevens.com/programs/pdf-tools/"
+    echo -e "\nPlease set the full path location of pdf-parser.py in the first line of the script."
+    echo -e "eg. '/home/user/downloads/pdf-parser.py' " 
+    echo -e "Pdf parser can be downloaded from https://blog.didierstevens.com/programs/pdf-tools/\n"
     exit
 fi
 
