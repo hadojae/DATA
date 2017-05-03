@@ -1,5 +1,4 @@
-# DATA
-Credential Phish Analysis and Automation
+# DATA: Credential Phish Analysis and Automation
 
 *Tested on Headless Ubuntu Server 16.04 
 
@@ -154,3 +153,17 @@ http://akukoomole.com/AdobeLogin/index.php
 DATA scripts are a constant work in progress. Feedback, issues, and additions are welcomed.
 
 Proper python packages will be created once suffecient testing and features have been added and more bugs have been squashed.
+
+### Troubleshooting
+
+If you have pcap writing issues, use this to fixup dumpcap perms, observed when using some VPS
+```
+sudo chgrp YOUR_USER /usr/bin/dumpcap
+sudo chmod 750 /usr/bin/dumpcap
+sudo setcap cap_net_raw,cap_net_admin+eip /usr/bin/dumpcap
+```
+
+Be sure to disable NIC features when capturing traffic run this as root. Checksum errors will cause all sorts of nightmares.
+```
+# for i in rx tx sg tso ufo gso gro lro; do ethtool -K eth0 $i off; done
+```
