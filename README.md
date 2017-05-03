@@ -79,6 +79,7 @@ $ python bucklegripper.py -s openphish -r ../../test_urls.txt
 ## Bullyblinder (py)
   - While capturing a pcap visit a suspected phishing page. Handle redirectors and obfuscation to find a web form. Scrape the form and make educated guesses at what should be entered into the fields. Submit the form and repeat.
   - Requirements can be installed by running or reviewing install_bullyblinder_deps.sh
+  
 ```
 usage: bullyblinder.py [-h] -u URL [-a USERAGENT] -i INTERFACE
 
@@ -130,5 +131,20 @@ http://justpropertydevelopers.com/scan/docg/doc/filewords/index.php
 ```
 
 ## Slickshoes (sh)
-  - A basic bash script that pulls links out of pdfs in streams or in clear view.
+  - A basic bash script that pulls urls out of pdfs in streams or in clear view.
+  - The only argument to the script is the path to a folder containing the pdfs you want to process.
   
+Example Usage
+```
+$ ./slickshoes.sh ~/PDFs/
+http://4cgemstones.com/polaiowpwwww/GD/index.php
+http://80bpm.net/invoice-17524-Apr-26-2017-US-048591/
+http://acheirapido.com.br/arquivos/pdf/
+http://adams-kuwait.com/REview/office
+http://rfaprojects.co.uk/invoice-80633-Apr-24-2017-US-665952/
+http://sacm.net/SCANNED/ZN3747CGMSCWC/
+https://geloscubinho.com.br/cgi/pdf/index.php
+http://afriquecalabashsafaris.com/layouts/GD/index.php
+http://akukoomole.com/AdobeLogin/index.php
+...continues...
+```
