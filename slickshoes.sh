@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 #pull links out of pdf files
 #hadojae
 #param is path to pdf files
@@ -26,10 +26,8 @@ fi
 
 done
 
-#format up the file for printing
-
-sort -u pdf_links.tmp | egrep -i -v -a "(DidierStevens\.com|fonts\.com|typoland\.com|monotypeimaging\.com|monotype\.com|dynaforms\.com|youtube\.com|radpdf\.com|igouv\.fr|support\.microsoft\.com|maps\.google\.com|wikipedia\.org|mitre\.org|code\.google\.com|www\.w3\.org|purl\.org|adobe\.com|convertapi\.com|wondershare\.net|iec\.ch|verisign\.com|microsoft\.com|neevia\.com|aiim\.org|pdf\-tools\.com|color\.org)";
-
-#cleanup
-rm pdf_links.tmp
-
+#if we found some urls, remove fp's, print file, and cleanup
+if [ -f pdf_links.tmp ]; then
+    sort -u pdf_links.tmp | egrep -i -v -a "(DidierStevens\.com|fonts\.com|typoland\.com|monotypeimaging\.com|monotype\.com|dynaforms\.com|youtube\.com|radpdf\.com|igouv\.fr|support\.microsoft\.com|maps\.google\.com|wikipedia\.org|mitre\.org|code\.google\.com|www\.w3\.org|purl\.org|adobe\.com|convertapi\.com|wondershare\.net|iec\.ch|verisign\.com|microsoft\.com|neevia\.com|aiim\.org|pdf\-tools\.com|color\.org)";
+    rm pdf_links.tmp
+fi
