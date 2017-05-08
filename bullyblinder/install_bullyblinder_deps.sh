@@ -15,4 +15,4 @@ sudo chmod a+x geckodriver
 sudo mv geckodriver /usr/bin
 
 #pip stuff
-sudo pip install mechanize Beautifulsoup4 urlnorm selenium faker pyvirtualdisplay lmxl
+sudo pip install mechanize Beautifulsoup4 urlnorm selenium faker pyvirtualdisplay lxml
