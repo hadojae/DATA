@@ -1107,6 +1107,12 @@ if __name__ == "__main__":
         #read the response content 
         page = response.read()
 
+        #check to see that we're looking at html
+        if br.viewing_html() == False:
+            print "\n[-] Page content does not appear to be HTML.\n"
+            print "    " + page[:100]
+            finish_him(count)
+
         #get the current url in case we've been through some redirects
         if br.geturl().startswith("http"): 
             current_url = br.geturl()
