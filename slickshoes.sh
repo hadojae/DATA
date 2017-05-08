@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 #pull links out of pdf files
 #hadojae
 #param is path to pdf files
