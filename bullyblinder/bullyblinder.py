@@ -81,6 +81,20 @@ def req_selenium(phish_url):
     using_selenium=True
     return response
 
+def redir_opendir(page, current_url):
+    soup = BeautifulSoup(page, "lxml")
+    if current_url[-1:] != "/":
+        current_url = current_url + "/"
+    for link in soup.findAll("a"):
+        if link is not None:
+            link = str(link.get("href"))
+            if re.search("(?:login|update|apple|paypal|account|e\-?mail|^ren\/$|^op\/$|^\*?id\/$|^ap\/$|sign\-?in)", link):
+                response = br.open(current_url+link)
+                return response
+            else:
+                continue
+    return False
+
 def redir_popupwnd(page, current_url):
     try:
         visit = re.search("javascript:popupwnd\('([^']+)','", page, re.IGNORECASE)
@@ -276,6 +290,15 @@ def obfuscation_b64data(page, current_url):
         except Exception:
             return False   
 
+def redir_paypal_landing(page, current_url):
+    soup = BeautifulSoup(page, "lxml")
+    for link in soup.findAll("a"):
+        link = str(link.get("href"))
+        if re.search("signin", link, re.IGNORECASE):
+            response = br.open(link)
+            return response
+    return False
+
 def obfuscation_multimail(page, current_url):
     soup = BeautifulSoup(page, "lxml")
     if not re.search('http:\/\/.+\/.+\..+$', current_url, re.IGNORECASE):
@@ -422,6 +445,17 @@ def redirs_and_obfuscations(page, current_url):
             return response
         else:
             print "[-] Failed to acquire popupwnd link - this could be a bug"
+            tshark("stop")
+            sys.exit()
+
+    #opendir
+    elif "Index of" in br.title():
+        print "[+] Found an open directory, attempting to handle the redir."
+        response = redir_opendir(page, current_url)
+        if response:
+            return response
+        else:
+            print "[-] I wasn't able to get to a phish landing from this, might want to investigate this manually."
             tshark("stop")
             sys.exit()
 
@@ -596,6 +630,17 @@ def redirs_and_obfuscations(page, current_url):
             return response
         else:
             print "[-] Failed to acquire js window.location.href redirector link - this could be a bug"
+            tshark("stop")
+            sys.exit()
+
+    #paypal landing
+    elif re.search("Now hiring @ https://www.paypal.com/jobs", page):
+        print "[+] Found a paypal landing page, processing the redir"
+        response = redir_paypal_landing(page, current_url)
+        if response:
+            return response
+        else:
+            print "[-] Failed to process a paypal landing redirector link - this could be a bug"
             tshark("stop")
             sys.exit()
 
