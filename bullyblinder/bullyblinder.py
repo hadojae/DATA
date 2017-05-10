@@ -319,7 +319,7 @@ def obfuscation_multimail(page, current_url):
         link = str(link.get("href"))
         if link is None:
             continue
-        if not re.search("(?:^al|^out|^oth|^365|^goog|^webmail|^gmail|^yah|^liamg|^oohay|^kooltuo|^office)", link, re.IGNORECASE):
+        if not re.search("^(?:..\/)*(?:al|out(?:look)?|oth(?:r|er)|365|(?:begin_file\/)?google|webmail|gmail|yah|liamg|oohay|kooltuo|office)", link, re.IGNORECASE):
             continue
         if ".php" in link or ".htm" in link:
             if link.startswith("http"):
@@ -1164,9 +1164,13 @@ if __name__ == "__main__":
 
         #check to see that we're looking at html
         if br.viewing_html() == False:
-            print "\n[-] Page content does not appear to be HTML.\n"
-            print "    " + page[:100]
-            finish_him(count)
+            if page[:4] == "%PDF":
+                print "\n[+] %s is a PDF" % current_url
+                finish_him(count)
+            else:
+                print "\n[-] Page content does not appear to be HTML.\n"
+                print "    " + page[:100]
+                finish_him(count)
 
         #get the current url in case we've been through some redirects
         if br.geturl().startswith("http"): 
@@ -1184,10 +1188,6 @@ if __name__ == "__main__":
 
         if len(url_array) > 1:
             referer = url_array[-2]
-
-	if page[:4] == "%PDF":
-	    print "[+] %s is a PDF" % current_url
-	    finish_him(count)
 
         # check for a form, if there isn't one, run it through all the redirector
         # and obfuscation checks
