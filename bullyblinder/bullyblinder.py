@@ -88,7 +88,7 @@ def redir_opendir(page, current_url):
     for link in soup.findAll("a"):
         if link is not None:
             link = str(link.get("href"))
-            if re.search("(?:login|update|apple|paypal|account|e\-?mail|^ren\/$|^op\/$|^\*?id\/$|^ap\/$|sign\-?in)", link):
+            if re.search("(?:login|update|archive|apple|paypal|account|e\-?mail|^ren\/$|^op\/$|^\*?id\/$|^ap\/$|sign\-?in)", link, re.IGNORECASE):
                 response = br.open(current_url+link)
                 return response
             else:

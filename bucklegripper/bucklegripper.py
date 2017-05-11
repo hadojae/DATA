@@ -3,9 +3,6 @@
 # Automation for phishing kit acquisition
 # hadojae
 
-# need to do some hashing of the page content (md5/fuzzy/sha256)
-# need to setup output directories and log files
-
 # -*- coding: utf-8 -*-
 
 import urllib2
@@ -78,12 +75,18 @@ def do_selenium(url, user_agent, domain, source):
             print bcolors.WARNING + "  [-] " + url + " has errored: %s" % e + bcolors.ENDC
             return False
 
-	# accept a pop up alert if one comes up
-	try:
-	    browser.switch_to_alert().accept()
-	    print "[+] Popup Alert observed, bypassing..."
-	except Exception:
-	    pass
+        # accept a pop up alert if one comes up
+        try:
+            alert = browser.switch_to.alert
+            print "\n[+] Popup alert observed: %s\n" % alert.text
+            if re.search("(?:requesting your username|zeus|call microsoft|call apple|call support)", alert.text, re.IGNORECASE):
+                print "\n    [-] This looks like it might be a tech support scam user/password popup, leaving it alone."
+                pass
+            else:
+                alert.accept()
+                print "[+] Popup Alert observed, bypassing..."
+        except Exception:
+            pass
 
 	# check page source to eliminate looking at pages that are parked and stuff we dont care about
 	try:
