@@ -503,6 +503,17 @@ def redirs_and_obfuscations(page, current_url):
 	    tshark("stop")
             sys.exit()
 
+    #unescape(tmp[0]);
+    elif re.search('unescape\(tmp\[0\]\)', page, re.IGNORECASE):
+        print "[+] Found that custom js xor obfuscation, letting selenium process the deobfuscation"
+        response = req_selenium(current_url)
+        if response:
+            return response
+        else:
+            print "[-] Failed to load a page with selenium in order to decode a custom js xor obfuscation - this could be a bug"
+            tshark("stop")
+            sys.exit()
+
     #document.write(unescape
     elif re.search('\(\s*unescape\s*\(\s*[\'"][^\s]{100}', page, re.IGNORECASE):
 	print "[+] Found unescape, processing the deobfuscation"
@@ -774,7 +785,7 @@ def form_fill():
                         continue
 
                     #full name 
-                    elif re.search('(?:holder|^comname$|^hold$|full(?:_|-|\s)?nax?me|name_?on_?card|naonca|^name$|^nom$)', control.name, flags=re.IGNORECASE):
+                    elif re.search('(?:^nn$|holder|^comname$|^hold$|full(?:_|-|\s)?nax?me|name_?on_?card|naonca|^name$|^nom$)', control.name, flags=re.IGNORECASE):
                         br.form[control.name] = '%s %s' % (fake.first_name(), fake.last_name()) 
                         continue
 
@@ -899,7 +910,7 @@ def form_fill():
                         continue
 
                     #credit card code
-                    elif re.search('(?:^comc$|git|ccv|cvv|^3d$|verify|card_veri_num|c22d)', control.name, flags=re.IGNORECASE):
+                    elif re.search('(?:^comc$|^cv$|git|ccv|cvv|^3d$|verify|card_veri_num|c22d)', control.name, flags=re.IGNORECASE):
                         br.form[control.name] = '%s' % fake.credit_card_security_code()
                         continue
 
