@@ -1223,11 +1223,14 @@ if __name__ == "__main__":
 
         #check to make sure that there isnt an empty form action
         if br.form.attrs:
-            if br.form.attrs['action'] == "":
-                print "\n [-] Empty form action found, checking for redirectors and obfuscation. \n"
-                response = redirs_and_obfuscations(page, current_url)
-                redir_count+=1
-                continue
+            try:
+                if br.form.attrs['action'] == "":
+                    print "\n [-] Empty form action found, checking for redirectors and obfuscation. \n"
+                    response = redirs_and_obfuscations(page, current_url)
+                    redir_count+=1
+                    continue
+            except Exception:
+                pass
 
         #acquire the post form
         find_post_form()
