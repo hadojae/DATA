@@ -241,13 +241,16 @@ def redir_jswindowlocation(page, current_url):
             return False
 
 def obfuscation_unescape(page):
-    escaped_todecode = re.search("unescape\s*\(\s*[\"']([^'\"]+)[\"']" , page, re.IGNORECASE)
-    encoded_content = escaped_todecode.group(1)
-    decoded_content = urllib2.unquote(encoded_content)
-    decoded_content = unicode(decoded_content, errors='replace')
+    soup = BeautifulSoup(page, "lxml")
+    for scr in soup(["script"]):
+        if re.search('unescape', str(scr), re.IGNORECASE):
+            encoded = re.search("(?:%[0-9A-F][0-9A-F])+", str(scr), re.IGNORECASE)
+            decoded_content = urllib2.unquote(encoded.group(0))
+            scr.replace_with(decoded_content)
+    decoded_page = soup.decode(formatter=None)   
     tmp_file = "/tmp/tmp.html"
     with open (tmp_file, "wb") as temp_f:
-        temp_f.write(decoded_content)
+        temp_f.write(decoded_page)
         temp_f.close()
     try:
         response = br.open('file://' + tmp_file)
