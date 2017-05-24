@@ -1173,8 +1173,16 @@ if __name__ == "__main__":
         if redir_count >= 9:
 	    redir_loop_infinite()
 
-        #read the response content 
-        page = response.read()
+       #read the response content
+        try:
+            page = response.read()
+        except Exception:
+            if count == 0:
+                req_selenium(initial_url)
+                continue
+            else:
+                print "[-] There was an error reading the page content from the mechanize socket, this may be a bug"
+                finish_him(count)
 
         #check to see that we're looking at html
         if br.viewing_html() == False:
@@ -1189,7 +1197,7 @@ if __name__ == "__main__":
         #get the current url in case we've been through some redirects
         if br.geturl().startswith("http"): 
             current_url = br.geturl()
-        elif br.geturl().startswith("file"):
+        elif br.geturl().startswith("file") and count!=0:
             current_url = url_array[-1]
         else:
             current_url = initial_url
