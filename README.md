@@ -157,6 +157,16 @@ Proper python packages will be created once suffecient testing and features have
 
 ### Troubleshooting
 
+Make sure you are using the latest versions of Firefox, Selenium, and Mechanize. Selenium and Mechanize can be upgraded via pip. 
+
+```
+sudo apt-get update && sudo apt-get install firefox
+sudo pip install mechanize --upgrade
+sudo pip install selenium --upgrade
+```
+
+The current version of geckodriver tested is v0.16.1.
+
 If you have pcap writing issues, use this to fixup dumpcap perms, observed when using some VPS
 ```
 sudo chgrp YOUR_USER /usr/bin/dumpcap
