@@ -62,7 +62,7 @@ def do_selenium(url, user_agent, domain, source):
 	profile = webdriver.FirefoxProfile()
 	profile.set_preference("general.useragent.override", user_agent)
 	browser = webdriver.Firefox(firefox_profile=profile)
-	#browser.set_page_load_timeout(15)
+	browser.set_page_load_timeout(15)
 
     	try:
        	    with Timeout(60):
