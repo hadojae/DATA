@@ -580,6 +580,19 @@ def redirs_and_obfuscations(page, current_url):
                 tshark("stop")
                 sys.exit()
 
+    #multi email provider 2
+    elif re.search('<title>\s*View\s*Document', page, re.IGNORECASE):
+        if re.search('margin-left:(.|\r|\n)+margin-right:(.|\r|\n)+margin-top:(.|\r|\n)+margin-bottom:(.|\r|\n)+overflow:\s*scroll;', page, re.IGNORECASE):
+            print "[+] Found a 'Select Your Email Provider' multi-phish landing, processing the landing"
+            if multi_phish != 1:
+                response = obfuscation_multimail(page, current_url)
+                if response:
+                    return response
+                else:
+                    print "[-] Failed to properly parse a 'select your email prover' phish - this could be a bug"
+                    #tshark("stop")
+                    sys.exit()
+
     #cheeky redir to example domain
     elif re.search('<title>Example Domain</title>', page, re.IGNORECASE):
         print "[+] Found an attempted refresh to 'Example Domain', processing the landing"
