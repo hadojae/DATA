@@ -22,7 +22,7 @@ file_type="$(file -b $i)"
 if [ "${file_type%%,*}" == "PDF document" ]; then
     egrep -i -a -r -o --no-filename "http[^)]+" $i >> pdf_links.tmp
     egrep -i -a -o --no-filename "\/URI\s*\([^)]+\)" $i | sed -r 's/.*\(([^)]+)\).*/\1/' >> pdf_links.tmp
-    python $pdf_parser_loc --searchstream --regex "https?:\/" --filter $i | egrep -i -a -o "http[^)\"\']+" >> pdf_links.tmp
+    python $pdf_parser_loc --regex --searchstream="https?:\/" --filter $i | egrep -i -a -o "http[^)\"\']+" >> pdf_links.tmp
 fi
 
 done
