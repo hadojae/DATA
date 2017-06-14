@@ -1,5 +1,7 @@
 # DATA: Credential Phish Analysis and Automation
 
+[Slides from presentation at CircleCityCon 2017](https://www.slideshare.net/secret/agq19JjVYt9M5W)
+
 *Tested on Headless Ubuntu Server 16.04 
 
 ## BUCKLEGRIPPER (py)
