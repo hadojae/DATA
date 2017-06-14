@@ -244,7 +244,7 @@ def obfuscation_unescape(page):
     soup = BeautifulSoup(page, "lxml")
     for scr in soup(["script"]):
         if re.search('unescape', str(scr), re.IGNORECASE):
-            encoded = re.search("(?:%[0-9A-F][0-9A-F])+", str(scr), re.IGNORECASE)
+            encoded = re.search("(?:%[0-9A-F][0-9A-F][^\"]+)", str(scr), re.IGNORECASE)
             decoded_content = urllib2.unquote(encoded.group(0))
             scr.replace_with(decoded_content)
     decoded_page = soup.decode(formatter=None)   
