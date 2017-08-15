@@ -682,7 +682,7 @@ def redirs_and_obfuscations(page, current_url):
             sys.exit()
 
     #if we have no form yet, we check for an iframe maybe?
-    elif re.search('<iframe src', page, re.IGNORECASE):
+    elif re.search('<iframe ', page, re.IGNORECASE):
 	print "[+] Found an iframe, following"
         response = redir_iframe_basic(page, current_url)
         if response:
