@@ -1,4 +1,4 @@
-# phish_sig.py
+# phish_sigs.py
 # https://github.com/hadojae/DATA/phish_sigs.py
 #
 # Usage: 
