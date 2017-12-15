@@ -167,7 +167,7 @@ sudo pip install mechanize --upgrade
 sudo pip install selenium --upgrade
 ```
 
-The current version of geckodriver tested is v0.16.1.
+The current version of geckodriver tested is v0.19.1.
 
 If you have pcap writing issues, use this to fixup dumpcap perms, observed when using some VPS
 ```
