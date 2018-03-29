@@ -142,7 +142,6 @@ def attempt_download(fileurl, filename, headers, domain, source):
         response = make_request(fileurl, headers)
         print bcolors.OKGREEN + "  [+] Found file at %s" % fileurl + bcolors.ENDC
         saved_file = time.strftime("%Y%m%d-%H%M%S") + '-' + source + '-' + filename
-        print saved_file
         with open(os.path.basename(saved_file), "wb") as local_file:
             local_file.write(response)
             local_file.close()
